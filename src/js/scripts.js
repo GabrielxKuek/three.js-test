@@ -13,7 +13,7 @@ document.body.appendChild(renderer.domElement);
 const scene = new THREE.Scene();
 
 const camera = new THREE.PerspectiveCamera(
-    75, 
+    45, 
     window.innerWidth / window.innerHeight,
     0.1,
     1000
@@ -24,7 +24,7 @@ const orbit = new OrbitControls(camera, renderer.domElement);
 const axesHelper = new THREE.AxesHelper(5);
 scene.add(axesHelper);
 
-camera.position.set(0, 2, 5);
+camera.position.set(-10, 30, 30);
 orbit.update();
 
 const boxGeometry = new THREE.BoxGeometry();
@@ -70,12 +70,26 @@ scene.add(dLightHelper);
 const dLightShadowHelper = new THREE.CameraHelper(directionalLight.shadow.camera);
 scene.add(dLightShadowHelper);
 
+// // =========== CONTAINED!!! =============
+// // spotlight is a bit broken :( tested for a while but cant get it to work
+// const spotLight = new THREE.SpotLight(0xFFFFFF);
+// scene.add(spotLight);
+// spotLight.position.set(-100, 100, 0);
+// spotLight.castShadow = true;
+// spotLight.angle = 0.2;
+
+// const sLightHelper = new THREE.SpotLightHelper(spotLight);
+// scene.add(sLightHelper);
+// // =========== CONTAINED!!! =============
+
 const gui = new dat.GUI();
 
 const options = {
     sphereColor: "#ffea00",
     wireframe: false,
-    speed: 0.01
+    speed: 0.01,
+    angle: 0.2,
+    penumbra: 0
 };
 
 gui.addColor(options, "sphereColor").onChange(function(e){
